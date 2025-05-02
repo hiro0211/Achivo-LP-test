@@ -800,3 +800,105 @@ header {
   font-size: 1.125rem;
   margin-bottom: 2rem;
 }
+
+/* ────────────────────────────────
+   Mobile Header Navigation
+──────────────────────────────── */
+/* ハンバーガーメニュー用スタイル */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s;
+}
+
+.menu-toggle:hover {
+  color: var(--primary);
+}
+
+/* 小さい画面で切り替え */
+@media (max-width: 768px) {
+  /* ナビゲーションを中央揃えに */
+  .nav {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* ハンバーガーボタンを表示 */
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1002;
+  }
+
+  /* 通常はナビリンクを隠す */
+  /* ────────────────────────────────
+   Mobile-First Header Navigation
+──────────────────────────────── */
+
+  /* 1) デフォルト（モバイル）ではナビ隠してハンバーガー表示 */
+  .nav-links {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s;
+  }
+  .menu-toggle:hover {
+    color: var(--primary);
+  }
+
+  /* 2) デスクトップ以上（769px以上）では通常ナビ表示 */
+  @media (min-width: 769px) {
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .menu-toggle {
+      display: none;
+    }
+  }
+
+  /* 3) メニュー開閉時のスタイル */
+  .nav-links {
+    position: absolute;
+    top: 100%; /* ヘッダー直下 */
+    right: 1rem;
+    background: #fff;
+    width: 220px;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 0.75rem 0;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .nav-links.active {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .nav-links a {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    border-left: 3px solid transparent;
+    transition: background 0.3s, border-left 0.3s;
+  }
+  .nav-links a:hover {
+    background: rgba(0, 0, 0, 0.03);
+    border-left: 3px solid var(--primary);
+  }
+}
